@@ -1,5 +1,4 @@
 fileName = "Amazon_Source.txt"
-newFile = "Amazon_Sorted.txt"
 
 
 class Transaction:
