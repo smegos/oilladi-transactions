@@ -1,4 +1,5 @@
-fileName = "Amazon_Source.txt"
+fileName = input("Enter the name of the file to be sorted: ")
+newFile = "Amazon_Sorted.txt"
 
 
 class Transaction:
@@ -22,13 +23,14 @@ class Transaction:
 transactionList = []
 
 sourceFile = open(fileName, "r")
+sortedFile = open(newFile, "w")
 purchases = 0
 returns = 0
 
 for line in sourceFile:
     try:
         fields = line.split("\t")
-        print(Transaction(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8]))
+        sortedFile.write(str(Transaction(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8])))
         transactionList.append(Transaction(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8]))
         if "UPPER" in fields[3].upper():
             purchases += 1
@@ -36,11 +38,10 @@ for line in sourceFile:
             returns += 1
 
     except IndexError:
-        print("Insufficient information in transaction listing.\n")
+        sortedFile.write("Insufficient information in transaction listing.\n")
 
 
 inventory = purchases - returns
-print("\nThis dataset shows: " + str(purchases) + " purchases, and " + str(returns) + " returns. Which shows " + str(inventory) + " net sales.")
-
+sortedFile.write("This dataset shows: " + str(purchases) + " purchases, and " + str(returns) + " returns. Which shows " + str(inventory) + " net sales.")
 
 sourceFile.close()
