@@ -47,7 +47,7 @@ for line in sourceFile:
             else:
                 dRefund[fields[8]] = 1
         else:
-            sortedFile.write("No purchase or Refund detected in this transaction.\n")
+            sortedFile.write("No purchase or refund detected in this transaction.\n")
 
     except IndexError:
         sortedFile.write("Insufficient information in transaction listing.\n")
@@ -55,19 +55,19 @@ for line in sourceFile:
 
 for key in list(dPayment.keys()):
     print(key, "Purchases: ", dPayment[key])
-    sortedFile.write((key), "Purchases: ", str(dPayment[key]))
+    sortedFile.write("{} {} {}\n".format(key, "Purchases: ", dPayment[key]))
 
 for key in list(dRefund.keys()):
     print(key, "Refunds: ", dRefund[key])
-    sortedFile.write(key, "Refunds: ", dRefund[key])
+    sortedFile.write("{} {} {}\n".format(key, "Refunds: ", dRefund[key]))
 
 for key in list(dPayment.keys()) and list(dRefund.keys()):
     print(key, "Net Sales: ", dPayment[key] - dRefund[key])
-    sortedFile.write(key, "Net Sales: ", dPayment[key] - dRefund[key])
+    sortedFile.write("{} {} {}\n".format(key, "Net Sales: ", dPayment[key] - dRefund[key]))
 
 inventory = purchases - returns
 
-sortedFile.write("This dataset shows: " + str(purchases) + " purchases, and " + str(returns) + " returns. Which shows " + str(inventory) + " net sales.")
+sortedFile.write("This set shows: " + str(purchases) + " purchases, and " + str(returns) + " returns. Which shows " + str(inventory) + " net sales.")
 
 sourceFile.close()
 sortedFile.close()
